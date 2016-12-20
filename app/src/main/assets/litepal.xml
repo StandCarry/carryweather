@@ -1,0 +1,14 @@
+<litepal>
+
+    <dbname value="carry_weather"></dbname>
+    <version value="1"></version>
+
+
+    <list>
+        <mapping class="com.example.administrator.carryweather.db.Province"/>
+        <mapping class="com.example.administrator.carryweather.db.City"/>
+        <mapping class="com.example.administrator.carryweather.db.County"/>
+
+    </list>
+
+</litepal>
