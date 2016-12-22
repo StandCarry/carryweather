@@ -2,6 +2,7 @@ package com.example.administrator.carryweather.fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.carryweather.R;
+import com.example.administrator.carryweather.activity.WeatherActivity;
 import com.example.administrator.carryweather.db.City;
 import com.example.administrator.carryweather.db.County;
 import com.example.administrator.carryweather.db.Province;
@@ -112,6 +114,15 @@ public class ChooseAreaFragment extends Fragment {
                 else if (currentLevel==LEVEL_CITY){
                     selecteCity=cityList.get(position);
                              queryCounties();                       //查询县列表
+                }
+                else if(currentLevel==LEVEL_COINTY){
+
+                    String weatherId=countyList.get(position).getWeatherId();
+                    Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
+
                 }
             }
         });
