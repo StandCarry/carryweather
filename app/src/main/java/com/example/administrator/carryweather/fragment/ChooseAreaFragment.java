@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.carryweather.R;
+import com.example.administrator.carryweather.activity.MainActivity;
 import com.example.administrator.carryweather.activity.WeatherActivity;
 import com.example.administrator.carryweather.db.City;
 import com.example.administrator.carryweather.db.County;
@@ -116,12 +117,20 @@ public class ChooseAreaFragment extends Fragment {
                              queryCounties();                       //查询县列表
                 }
                 else if(currentLevel==LEVEL_COINTY){
-
                     String weatherId=countyList.get(position).getWeatherId();
-                    Intent intent=new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity()instanceof MainActivity){
+                        Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                    else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity weatherActivity=(WeatherActivity)getActivity();
+                        weatherActivity.drawerLayout.closeDrawers();
+                        weatherActivity.swipeRefreshLayout.setRefreshing(true);
+                        weatherActivity.requestWeather(weatherId);
+
+                    }
 
                 }
             }
